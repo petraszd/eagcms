@@ -1,0 +1,16 @@
+{% extends "eagadmin/sitetree-base.html" %}
+{% block title %}{% trans "Change Type Of" %} » {{ page.title }}{% endblock %}
+{% block content %}
+  {% include "eagadmin/back-actions.html" %}
+  <h1>{% trans "Change Type Of" %} » {{ page.title }}</h1>
+  <p>{% trans "WARNING! Some of page data could be lost!" %}</p>
+  <form action="{% url eagadmin:type page.key %}" method="POST">
+    <fieldset id="PageInfo">
+      <legend>{% trans "Chooce new type" %}</legend>
+      {{ form.as_p }}
+    </fieldset>
+    <div>
+      <input type="submit" value="Change" />
+    </div>
+  </form>
+{% endblock %}

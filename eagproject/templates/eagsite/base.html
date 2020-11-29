@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  {% load eagsite %}{% eagsite_head %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}static/css/style.css" type="text/css" media="screen" charset="utf-8">
+</head>
+<body class="{{ current.class_name }}">
+  {% eagsite_get_page "" as root %}
+  <div id="Wrapper">
+    <div id="Content">
+      <ul id="Menu">
+        <li class="home {% ifequal current root %}current{% endifequal %}"><a href="{{ root.get_absolute_url }}">{{ root.menu_title}} </a>
+        {% eagsite_list_menu "main-menu" %}
+      </ul>
+      <h1 id="SiteName">&lt;Site Name&gt;</h1>
+      <div class="clr"></div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <div id="Footer">
+    Copyright (c) &lt;Year&gt; &lt;Name Surname|Company's Name&gt;
+  </div>
+</body>
+</html>

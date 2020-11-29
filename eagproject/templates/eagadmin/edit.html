@@ -1,0 +1,50 @@
+{% extends "eagadmin/sitetree-base.html" %}
+{% block title %}{% trans "Edit Page" %} » {{ page.title }} {% endblock %}
+{% block content %}
+  {% include "eagadmin/back-actions.html" %}
+  <h1>Edit Page » {{ page.title }}</h1>
+  {% if form.errors or cform.errors %}
+    {% include "eagadmin/error-msg.html" %}
+  {% endif %}
+  <form action="{% url eagadmin:edit page.key %}" method="post">
+    <fieldset id="PageInfo">
+      <legend>{% trans "Page Info" %}</legend>
+      {{ form.as_p }}
+    </fieldset>
+    <fieldset id="ContentInfo">
+      <legend>{% trans "Content Info" %}</legend>
+      {% if cform.fields %}
+        {{ cform.as_p }}
+      {% else %}
+        {% trans "This page type has no content" %}.
+      {% endif %}
+    </fieldset>
+    <div>
+      <input type="submit" value="{% trans "Save" %}" />
+    </div>
+  </form>
+{% endblock %}
+
+{% block head_end %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}eag-static/css/MooEditable/MooEditable.css" type="text/css" ></link>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}eag-static/css/MooEditable/MooEditable.Table.css" type="text/css" ></link>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}eag-static/css/MooEditable/MooEditable.Forecolor.css" type="text/css" ></link>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}eag-static/css/MooEditable/MooEditable.Extras.css" type="text/css" ></link>
+{% endblock %}
+
+{% block body_end %}
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/picasa.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    PicasaUrl.noGalleries = '{% trans "No Picasa galleries found. Go to <a href=\'http://picasaweb.google.com/\'>Picasa Web</a> and add one." %}';
+    PicasaUrl.galleries = '{% url eagadmin:picasa-all %}';
+    PicasaUrl.gallery = '{% url eagadmin:picasa-one '%albumid%' %}';
+  </script>
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/mooeditable.js"></script>
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/pageinfo.js"></script>
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/content.js"></script>
+{% endblock %}
+

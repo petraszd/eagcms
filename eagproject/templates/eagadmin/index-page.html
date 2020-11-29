@@ -1,0 +1,11 @@
+<div class="info">
+  <span>{{ page.class_name }}</span>
+  <a class="change-type" href="{% url eagadmin:type page.key %}">{% trans "Change type" %}</a>
+  <a class="edit" href="{% url eagadmin:edit page.key %}">{% trans "edit" %}</a>
+  {% if not page.is_root %}
+  <a class="delete" href="{% url eagadmin:delete page.key %}">{% trans "delete" %}</a>
+  {% else %}
+  <span class="delete">{% trans "delete" %}</span>{# Just for layout #}
+  {% endif %}
+</div>
+{{ page.title }}

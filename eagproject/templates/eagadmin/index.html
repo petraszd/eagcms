@@ -1,0 +1,39 @@
+{% extends "eagadmin/sitetree-base.html" %}
+{% load eagadmin %}
+{% block title %}{% trans "Site Tree" %}{% endblock %}
+
+{% block content %}
+  {% include "eagadmin/tree-actions.html" %}
+  <div id="Root">
+    {% with tree.0 as page %}
+      {% include "eagadmin/index-page.html" %}
+    {% endwith %}
+  </div>
+  <ul id="Tree" style="{{ 2|margin_left }}">
+  {% for p in tree|slice:"1:" %}
+    <li id="{{ p.key }}" class="{{ p.level }}" style="{{ p.level|margin_left }}">
+      {% with p as page %}
+        {% include "eagadmin/index-page.html" %}
+      {% endwith %}
+    </li>
+  {% endfor %}
+  </ul>
+  <div id="OrderButtons" style="display: none;">
+    <button id="Cancel" onclick="location.href='{% url eagadmin:index %}';">{% trans "Cancel" %}</button>
+    <button id="SaveOrder">{% trans "Save Order" %}</button>
+  </div>
+
+  {% include "eagadmin/tree-actions.html" %}
+
+  <ul id="Holder" style="display: none;"></ul>
+  <form id="ReorderForm" action={% url eagadmin:reorder %} method="post">
+    <input id="ReorderData" name="new_order" type="hidden" value="" />
+  </form>
+{% endblock %}
+
+
+{% block footer %}
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/site-tree.js"></script>
+{% endblock %}
+

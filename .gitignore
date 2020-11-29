@@ -1,0 +1,8 @@
+main.py
+eagproject/settings.py
+*.pyc
+*.swp
+*.yaml
+
+docs/_build/*
+docs/_templates/*

@@ -1,0 +1,19 @@
+{% extends "eagadmin/sitetree-base.html" %}
+{% block title %}{% trans "New Page" %}{% endblock %}
+{% block content %}
+  <h1>{% trans "New Page" %}</h1>
+  {% if page_form.errors %}
+    {% include "eagadmin/error-msg.html" %}
+  {% endif %}
+  <form action="{% url eagadmin:add %}" method="post">
+    <fieldset id="PageInfo">
+      <legend>{% trans "Page Info" %}</legend>
+      {{ page_form.as_p }}
+    </fieldset>
+    <div><input type="submit" value="{% trans "Save" %}" /></div>
+  </form>
+{% endblock %}
+{% block body_end %}
+  <script type="text/javascript" charset="utf-8"
+    src="{{ MEDIA_URL }}eag-static/js/pageinfo.js"></script>
+{% endblock %}
